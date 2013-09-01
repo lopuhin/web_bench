@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 import sys
+import logging
+logging.basicConfig(level=logging.INFO)
+import transaction
+
 import tornado.httpserver
 import tornado.ioloop
 import tornado.web
@@ -35,8 +39,12 @@ app = tornado.web.Application(urls)
 
 if __name__ == "__main__":
     server = tornado.httpserver.HTTPServer(app)
-    server.listen(int(sys.argv[1]))
+    n_threads, port = map(int, sys.argv[1:3])
+    transaction.set_num_threads(n_threads)
+    server.listen(port)
     start = tornado.ioloop.IOLoop.instance().start
-    if '--profile' in sys.argv[2:]:
+    if '--profile' in sys.argv:
+        start = debug_exec(profile=True)(start)
+    elif '--stat-profile' in sys.argv:
         start = debug_exec(stat_profile=True)(start)
     start()
