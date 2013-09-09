@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import sys
 import logging
-logging.basicConfig(level=logging.WARN)
+logging.basicConfig(level=logging.WARN, format='%(asctime)s %(message)s')
 import transaction
 
 import tornado.httpserver
