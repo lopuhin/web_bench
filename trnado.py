@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import sys
 import logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.WARN)
 import transaction
 
 import tornado.httpserver
