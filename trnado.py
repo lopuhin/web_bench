@@ -24,14 +24,22 @@ class ServeHTTPPrimes(tornado.web.RequestHandler):
                 self.write("%d: %s\n" % (i, txt))
 
 
+class ServeHTTPPrimes2(tornado.web.RequestHandler):
+    def get(self, txt, num):
+        output = []
+        for i in xrange(int(num)):
+            if is_prime(i):
+                output.append("%d: %s\n" % (i, txt))
+        self.write(''.join(output))
+
+
 class SimpleServeHTTP(tornado.web.RequestHandler):
     def get(self):
         self.write("hi!")
 
 
 urls = [
-    ("^/([^/]+)/([0-9]+)$", ServeHTTPPrimes)
-    #("^/([^/]+)/([0-9]+)$", ServeHTTP)
+    ("^/([^/]+)/([0-9]+)$", ServeHTTPPrimes2)
     #("^/$", SimpleServeHTTP)
 ]
 app = tornado.web.Application(urls)
