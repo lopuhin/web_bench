@@ -82,6 +82,7 @@ def test_scaling_threads(N):
         threads.append(t)
     for t in threads:
         t.join()
+        print 'finished'
 
 def test_scaling_fake(_):
     for x in tested_primes:

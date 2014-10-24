@@ -45,10 +45,11 @@ def debug_exec(*deco_args, **deco_kwargs):
 
 
 def is_prime(n):
+    result = True
     for i in xrange(2, n):
         if n % i == 0:
-            return False
-    return True
+            result = False
+    return result
 
 
 assert is_prime(7)
